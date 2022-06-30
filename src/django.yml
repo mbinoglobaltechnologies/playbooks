@@ -1,0 +1,15 @@
+- hosts: web
+  gather_facts: false
+  roles:
+    - role: users
+      user: ubuntu
+      user_groups:
+        - root
+      sudo: true
+      authorised_key: ~/.ssh/id_rsa.pub
+
+    - role: users
+      user: deploy
+      sudo: false
+      generate_ssh_key: true
+      authorised_key: ~/.ssh/id_rsa.pub

@@ -1,0 +1,23 @@
+- name: Create user  and Groups
+  user:
+    name: "{{ user }}"
+    groups: "{{ user_groups }}"
+    state: present
+
+- name: Add public key to authorized_keys
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ lookup('file', '{{ authorised_key }}') }}"
+  when: authorised_key != ""
+
+- name: Add {{ user }} to sudoers file
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^{{ user }}'
+    line: '{{ user }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+  when: sudo == true
+
+- include: generate-ssh-key.yml
+  when: generate_ssh_key == true

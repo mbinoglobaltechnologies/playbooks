@@ -1,0 +1,10 @@
+db:
+  hosts:
+    ubuntu:
+      ansible_host: 135.181.40.21
+      ansible_user: root
+web:
+  hosts:
+    ubuntu:
+      ansible_host: 135.181.40.21
+      ansible_user: root

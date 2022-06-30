@@ -1,0 +1,6 @@
+---
+user: ubuntu
+user_groups: [ ]
+authorised_key: ""
+sudo: false
+generate_ssh_key: false
